@@ -2,6 +2,15 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ChevronRight, Star, Facebook, Twitter, MessageCircle, X, ChevronLeft } from 'lucide-react';
 import '@fontsource/exo-2/400.css';
 import '@fontsource/exo-2/700.css';
+import { FaGem, FaShieldAlt, FaChess, FaCoins, FaGamepad } from 'react-icons/fa';
+import weeklyImage from './images/image.png';
+import arenaImage from './images/arena.png';
+import lordsImage from './images/lords.png';
+import dungeonsImage from './images/dungeons.png';
+import pvpImage from './images/pvp.png';
+import flashImage from './images/flash.png';
+import challengesImage from './images/challenge.png';
+
 
 // Updated Button component
 const Button = ({ children, style, variant = 'default', href, ...props }) => {
@@ -52,6 +61,16 @@ const characters = [
   { name: 'Archdruid of Wind', image: 'https://storage.googleapis.com/wizarena/wizards_nobg/2947.png', replayUrl: 'https://www.wizardsarena.net/fightreplay/fights/azSUnWAJIprYF0tQSETC' },
   { name: 'Archdruid of Dark', image: 'https://storage.googleapis.com/wizarena/wizards_nobg/2142.png', replayUrl: 'https://www.wizardsarena.net/fightreplay/fights/NO7BR7aJlxEX6LEgQRZA' },
   
+];
+
+const gameModes = [
+  { name: 'Weekly Tournaments', image: weeklyImage, description: 'Compete weekly for top prizes.', link: 'https://www.wizardsarena.net/tournaments' },
+  { name: 'Arena', image: arenaImage, description: 'Free-to-Play daily battles with Rewards', link: 'https://www.wizardsarena.net/arena' },
+  { name: 'Lords of Wizards World', image: lordsImage, description: 'Compete to become Lord of a Region', link: 'https://www.wizardsarena.net/lords' },
+  { name: 'Dungeons of Wizards World', image: dungeonsImage, description: 'Slay as many Orcs as you can before falling', link: 'https://www.wizardsarena.net/dungeons' },
+  { name: 'PVP', image: pvpImage, description: 'Engage in Weekly player versus player combat', link: 'https://www.wizardsarena.net/pvp' },
+  { name: 'Flash Tournaments', image: flashImage, description: 'Create your own tournaments with custom rules', link: 'https://www.wizardsarena.net/flashtournaments' },
+  { name: 'Challenges', image: challengesImage, description: 'Complete various challenges for rewards.', link: 'https://www.wizardsarena.net/challenges' }, 
 ];
 
 const WizardsArenaLanding = () => {
@@ -349,13 +368,63 @@ const WizardsArenaLanding = () => {
       marginBottom: '1rem',
     },
     footer: {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      textAlign: 'center',
-      padding: '1.5rem',
-      marginTop: '4rem',
+      backgroundColor: '#1F2937', // Dark background for the footer
+      padding: '2rem', // Increased padding for better spacing
+      color: 'white', // Set text color to white
+    },
+    footerContent: {
+      display: 'flex',
+      flexDirection: 'column', // Stack sections vertically
+      alignItems: 'flex-start', // Align items to the left
+    },
+    footerSections: {
+      display: 'flex',
+      flexDirection: 'row', // Horizontal layout for links
+      justifyContent: 'space-between',
+      flexWrap: 'wrap', // Allow wrapping for responsiveness
+      width: '100%', // Full width for the sections
+    },
+    footerLinks: {
+      textAlign: 'left',
+      marginRight: '2rem', // Space between link sections
+      flex: '1 1 200px', // Allow links to grow and set a minimum width
+      marginBottom: '1rem', // Space below each link section
+    },
+    footerSocials: {
+      textAlign: 'left', // Align text to the left for social links
+    },
+    socialLinksContainer: {
+      display: 'flex',
+      flexWrap: 'wrap', // Allow wrapping for responsiveness
+    },
+    socialColumn: {
+      flex: '1 1 50%', // Two columns, each taking half the width
+      marginBottom: '1rem', // Space below each column
+    },
+    footerSectionTitle: {
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      marginBottom: '0.5rem',
+      color: '#64B5F6',
     },
     footerText: {
       color: '#6B7280',
+      textAlign: 'center', // Center the copyright text
+      marginTop: '1rem', // Space above the copyright text
+    },
+    footerLink: {
+      color: 'white', // Set link color to white
+      textDecoration: 'none',
+      margin: '0 0 0.5rem', // Adjust margin for vertical spacing
+      display: 'block', // Make links block elements for vertical stacking
+      transition: 'color 0.3s',
+    },
+    socialLink: {
+      color: 'white', // Set social link color to white
+      textDecoration: 'none',
+      margin: '0 0 0.5rem', // Adjust margin for vertical spacing
+      display: 'block', // Make links block elements for vertical stacking
+      transition: 'color 0.3s',
     },
     demoSection: {
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -421,30 +490,6 @@ const WizardsArenaLanding = () => {
       cursor: 'pointer',
       zIndex: 10, // Ensure the close button is above the overlay
     },
-    socialLinks: {
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '1rem',
-      marginTop: '2rem',
-    },
-    socialIcon: {
-      cursor: 'pointer',
-    },
-    exitButton: {
-      position: 'absolute',
-      top: '10px',
-      right: '10px',
-      padding: '5px 10px',
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      color: 'red',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer',
-      fontSize: '0.8rem',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '5px',
-    },
     characterSelect: {
       display: 'flex',
       justifyContent: 'center',
@@ -502,6 +547,41 @@ const WizardsArenaLanding = () => {
       padding: '0.5rem 1rem',
       marginTop: '1rem',
       cursor: 'pointer',
+    },
+    gameModeContainer: {
+      display: 'flex',
+      overflowX: 'auto',
+      padding: '1rem',
+      gap: '1rem',
+    },
+    gameModeCard: {
+      minWidth: '250px',
+      maxWidth: '250px',
+      height: '200px',
+      background: '#1F2937',
+      borderRadius: '0.5rem',
+      padding: '1rem',
+      textAlign: 'center',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+      transition: 'transform 0.3s ease',
+    },
+    gameModeImage: {
+      width: '100%',
+      height: '120px',
+      objectFit: 'cover',
+      borderRadius: '0.375rem',
+    },
+    gameModeName: {
+      color: '#64B5F6',
+      marginTop: '0.5rem',
+    },
+    gameModeDescription: {
+      color: '#B0BEC5',
+      marginTop: '0.5rem',
+      fontSize: '0.9rem',
+    },
+    gameModeCardHover: {
+      transform: 'scale(1.05)',
     },
   }), [isMobile, showDescription]); // Added isMobile and showDescription to the dependency array
 
@@ -565,6 +645,11 @@ const WizardsArenaLanding = () => {
     );
   };
 
+  // Add hover effect for footer links
+  const handleFooterLinkHover = (e, isHovering) => {
+    e.target.style.color = isHovering ? '#A5B4FC' : 'white'; // Change hover color
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.backgroundEffect}></div>
@@ -575,7 +660,7 @@ const WizardsArenaLanding = () => {
             <span style={styles.logoText}>Wizards Arena</span>
           </div>
           <Button href="https://wizardsarena.net" target="_blank" style={{ display: 'flex', alignItems: 'center' }}>
-            Enter Dapp
+            Enter App
             <ChevronRight size={16} style={{ marginLeft: '0.5rem' }} />
           </Button>
         </header>
@@ -636,22 +721,6 @@ const WizardsArenaLanding = () => {
             </div>
           </div>
         </section>
-        
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Featured Wizards</h2>
-          <div style={styles.wizardGrid}>
-            {[1, 2, 3].map((i) => (
-              <div key={i} style={styles.wizardCard}>
-                <img src={`/api/placeholder/300/400`} alt={`Wizard ${i}`} style={styles.wizardImage} />
-                <h3 style={styles.wizardTitle}>Archmage #{i}</h3>
-                <p style={styles.wizardDescription}>A mystical sorcerer with otherworldly powers.</p>
-                <Button variant="outline" style={{ width: '100%' }}>
-                  Reveal Secrets
-                </Button>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <section style={{...styles.section, ...styles.demoSection}}>
           <h2 style={styles.demoTitle}>Wizard Battle Demo</h2>
@@ -675,58 +744,73 @@ const WizardsArenaLanding = () => {
           )}
         </section>
 
-        <section style={{...styles.section, ...styles.testimonialSection}}>
-          <h2 style={styles.sectionTitle}>What Players Are Saying</h2>
-          <div style={styles.testimonial}>
-            <p>"Wizards Arena is the most immersive and exciting blockchain game I've ever played!" - CryptoWizard99</p>
-          </div>
-          <div style={styles.testimonial}>
-            <p>"The strategic depth and beautiful artwork make this game a must-play for any fantasy enthusiast." - MagicMaster42</p>
-          </div>
-        </section>
-
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>Key Features</h2>
-          <div style={styles.featureList}>
-            {['Unique NFT Wizards', 'Strategic Gameplay', 'Blockchain Integration', 'Regular Updates'].map((feature, index) => (
-              <div key={index} style={styles.featureItem}>
-                <Star size={32} color="#A5B4FC" />
-                <h3 style={{color: '#A5B4FC', marginTop: '1rem'}}>{feature}</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {[
+              { name: 'NFT Marketplace', icon: <FaGem size={32} color="#A5B4FC" /> },
+              { name: 'NFT Upgrades', icon: <FaShieldAlt size={32} color="#A5B4FC" /> },
+              { name: '$WIZA Token', icon: <FaCoins size={32} color="#A5B4FC" /> },
+              { name: '7 Game Modes', icon: <FaGamepad size={32} color="#A5B4FC" /> },
+            ].map((feature, index) => (
+              <div key={index} style={{ textAlign: 'center', margin: '1rem' }}>
+                {feature.icon}
+                <h3 style={{ color: '#A5B4FC', marginTop: '1rem' }}>{feature.name}</h3>
               </div>
             ))}
           </div>
         </section>
 
         <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Stay Updated</h2>
-          <form style={styles.newsletterForm} onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={styles.input}
-              required
-            />
-            <Button type="submit">
-              Subscribe
-            </Button>
-          </form>
+          <h2 style={styles.sectionTitle}>Game Modes</h2>
+          <div style={styles.gameModeContainer}>
+            {gameModes.map((mode, index) => (
+              <a 
+                key={index} 
+                href={mode.link}
+                style={{ textDecoration: 'none' }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = styles.gameModeCardHover.transform}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'none'}
+              >
+                <div style={styles.gameModeCard}>
+                  <img src={mode.image} alt={mode.name} style={styles.gameModeImage} />
+                  <h3 style={styles.gameModeName}>{mode.name}</h3>
+                  <p style={styles.gameModeDescription}>{mode.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
         </section>
 
-        <div style={styles.socialLinks}>
-          <div style={styles.socialIcon}>
-            <Facebook size={24} color="#A5B4FC" />
-          </div>
-          <div style={styles.socialIcon}>
-            <Twitter size={24} color="#A5B4FC" />
-          </div>
-          <div style={styles.socialIcon}>
-            <MessageCircle size={24} color="#A5B4FC" />
-          </div>
-        </div>
-        
         <footer style={styles.footer}>
+          <div style={styles.footerContent}>
+            <div style={styles.footerSections}>
+              <div style={styles.footerLinks}>
+              <h4 style={styles.footerSectionTitle}>Links/Tools</h4>
+                <a href="/about" style={styles.footerLink}>Docs/Handbook</a>
+                <a href="/contact" style={styles.footerLink}>Buy $WIZA</a>
+                <a href="/privacy" style={styles.footerLink}>NFT Rarity</a>
+                <a href="/terms" style={styles.footerLink}>Level Calculator</a>
+              </div>
+              <div style={styles.footerLinks}>
+                <h4 style={styles.footerSectionTitle}>Partners</h4>
+                <a href="/about" style={styles.footerLink}>Kadena</a>
+                <a href="/contact" style={styles.footerLink}>KDSwap</a>
+                <a href="/privacy" style={styles.footerLink}>Linx Wallet</a>
+              </div>
+              <div style={styles.footerSocials}>
+                <h4 style={styles.footerSectionTitle}>Follow Us</h4>
+                <div style={styles.socialLinksContainer}>
+                  <div style={styles.socialColumn}>
+                    <a href="https://facebook.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">X/Twitter</a>
+                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Discord</a>
+                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Telegram</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <p style={styles.footerText}>&copy; 2024 Wizards Arena. All rights reserved.</p>
         </footer>
       </div>
