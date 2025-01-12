@@ -583,6 +583,23 @@ const WizardsArenaLanding = () => {
     gameModeCardHover: {
       transform: 'scale(1.05)',
     },
+    exitButton: {
+      position: 'absolute',
+      top: '10px',
+      right: '10px',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      color: 'red',
+      border: 'none',
+      borderRadius: '5px',
+      padding: '5px 10px',
+      cursor: 'pointer',
+      zIndex: 10,
+      display: 'flex',
+      alignItems: 'center',
+    },
+    exitIcon: {
+      marginRight: '5px',
+    },
   }), [isMobile, showDescription]); // Added isMobile and showDescription to the dependency array
 
   // Updated getButtonPosition function
@@ -671,7 +688,10 @@ const WizardsArenaLanding = () => {
             Immerse yourself in a mystical realm where arcane strategy meets blockchain sorcery. Upgrade, battle, and earn with unique NFT wizards in this ethereal Web3 experience.
           </p>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button style={{ display: 'flex', alignItems: 'center' }}>
+            <Button 
+              style={{ display: 'flex', alignItems: 'center' }} 
+              href="https://discord.gg/ds8fyte9fu"
+            >
               Begin Your Journey
               <ChevronRight size={16} style={{ marginLeft: '0.5rem' }} />
             </Button>
@@ -713,7 +733,7 @@ const WizardsArenaLanding = () => {
                     </div>
                   </div>
                   <button style={styles.exitButton} onClick={handleExitClick}>
-                    <X size={16} />
+                    <X size={16} style={styles.exitIcon} />
                     Exit
                   </button>
                 </>
@@ -787,25 +807,25 @@ const WizardsArenaLanding = () => {
             <div style={styles.footerSections}>
               <div style={styles.footerLinks}>
               <h4 style={styles.footerSectionTitle}>Links/Tools</h4>
-                <a href="/about" style={styles.footerLink}>Docs/Handbook</a>
-                <a href="/contact" style={styles.footerLink}>Buy $WIZA</a>
-                <a href="/privacy" style={styles.footerLink}>NFT Rarity</a>
-                <a href="/terms" style={styles.footerLink}>Level Calculator</a>
+                <a href="https://prism-sand-bf4.notion.site/13c52883dc3180bcaab2e26ce6b75475?v=13c52883dc3180a1837d000c641d83f0" style={styles.footerLink}>Docs/Handbook</a>
+                <a href="https://www.kdswap.exchange/swap/kda/wiza" style={styles.footerLink}>Buy $WIZA</a>
+                <a href="https://www.kaderare.com/" style={styles.footerLink}>NFT Rarity</a>
+                <a href="https://ronrank.xyz/calculator" style={styles.footerLink}>Level Calculator</a>
               </div>
               <div style={styles.footerLinks}>
                 <h4 style={styles.footerSectionTitle}>Partners</h4>
-                <a href="/about" style={styles.footerLink}>Kadena</a>
-                <a href="/contact" style={styles.footerLink}>KDSwap</a>
-                <a href="/privacy" style={styles.footerLink}>Linx Wallet</a>
+                <a href="https://kadena.io" style={styles.footerLink}>Kadena</a>
+                <a href="https://kdswap.exchange" style={styles.footerLink}>KDSwap</a>
+                <a href="https://linxwallet.xyz" style={styles.footerLink}>Linx Wallet</a>
               </div>
               <div style={styles.footerSocials}>
                 <h4 style={styles.footerSectionTitle}>Follow Us</h4>
                 <div style={styles.socialLinksContainer}>
                   <div style={styles.socialColumn}>
-                    <a href="https://facebook.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">X/Twitter</a>
-                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Discord</a>
-                    <a href="https://twitter.com" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Telegram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61565249494577" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <a href="https://twitter.com/WizardsArena" style={styles.socialLink} target="_blank" rel="noopener noreferrer">X/Twitter</a>
+                    <a href="https://discord.gg/ds8fyte9fu" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Discord</a>
+                    <a href="https://t.me/wizardsarena_announcments" style={styles.socialLink} target="_blank" rel="noopener noreferrer">Telegram</a>
                   </div>
                 </div>
               </div>
